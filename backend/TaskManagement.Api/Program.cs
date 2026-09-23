@@ -38,9 +38,11 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddAuthorization();
+ builder.Services.AddScoped<TaskManagement.Api.Services.TokenService>();
 
 // Swagger
 // Swagger
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
