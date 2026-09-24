@@ -1,0 +1,27 @@
+services:
+  backend:
+    build:
+      context: ./backend/TaskManagement.Api
+    container_name: tms-backend
+    ports:
+      - "5001:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Server=sql-tms,1433;Database=TmsDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True"
+    networks:
+      - tms-network
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: tms-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - tms-network
+
+networks:
+  tms-network:
+    external: true

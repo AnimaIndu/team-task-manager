@@ -92,5 +92,12 @@ app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    TaskManagement.Api.Data.SeedData.Seed(db);
+}
+
 
 app.Run();
+public partial class Program { }
